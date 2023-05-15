@@ -14,6 +14,6 @@ COPY . .
 
 RUN pip install --upgrade pip --no-cache-dir
 RUN pip install wheel --no-cache-dir
-RUN pip install -r /SemSeg-distill/requirements.txt --no-cache-dir
+RUN pip install -r SemSeg-distill/requirements.txt --no-cache-dir
 
 CMD [ "echo", "'PyTorch test image'" ]
