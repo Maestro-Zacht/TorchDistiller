@@ -3,7 +3,7 @@ import argparse
 import logging
 import time
 
-        
+
 # Dataset
 DATASET = 'cityscapes'
 NUM_CLASSES = 19 if DATASET == 'cityscapes' else 21
@@ -13,8 +13,8 @@ if DATASET == 'cityscapes':
     DATA_LIST_TRAIN_PATH = './dataset/list/cityscapes/train.lst'
     DATA_LIST_VAL_PATH = './dataset/list/cityscapes/val.lst'
     DATA_LIST_TEST_PATH = './dataset/list/cityscapes/test.lst'
-    T_CKPT = '/home/simone/kd/CWD/ckpt/teacher_city.pth' # '../../CWD/ckpt/resnet101.pth' #
-else: 
+    T_CKPT = '/home/simone/kd/CWD/ckpt/teacher_city.pth'  # '../../CWD/ckpt/resnet101.pth' #
+else:
     DATA_LIST_TRAIN_PATH = '/home/simone/kd/CIRKD/data/PascalVOC/ImageSets/Segmentation/train.txt'
     DATA_LIST_VAL_PATH = '/home/simone/kd/CIRKD/data/PascalVOC/ImageSets/Segmentation/val.txt'
     DATA_LIST_TEST_PATH = None
@@ -47,13 +47,13 @@ SEED = 0
 N_TRIALS = 36
 HP_SEARCH_NAME = 'dkd'
 HP_SEARCH_DIR = 'trials'
-    
+
+
 class TrainOptions():
     def initialize(self):
         parser = argparse.ArgumentParser(description='train')
-        
+
         # GPU
-        parser.add_argument('--local_rank', default=0, type=int)
         parser.add_argument("--gpu", default='0', help="Choose gpu device")
 
         # Dataset
@@ -67,7 +67,7 @@ class TrainOptions():
         parser.add_argument("--random_mirror", action="store_true", help="Randomly mirror the inputs during the training")
         parser.add_argument("--random_scale", action="store_true", help="Randomly scale the inputs during the training")
         parser.add_argument("--domain", default='None')
-        
+
         # Weights
         parser.add_argument('--T_ckpt_path', type=str, default=T_CKPT, help='teacher ckpt path')
         parser.add_argument('--T_path', type=str, default=T_PATH, help='teacher ckpt path')
@@ -118,28 +118,28 @@ class TrainOptions():
         parser.add_argument('--lambda_ifv', type=float, default=200.0, help='lambda_ifv')
         # AKD
         parser.add_argument("--akd", type=str2bool, default='False')
-        parser.add_argument('--lambda_akd', type=float, default=1.0, help='lambda_akd') 
+        parser.add_argument('--lambda_akd', type=float, default=1.0, help='lambda_akd')
         parser.add_argument('--k', type=float, default=0.5, help='k')
         # SRRL
         parser.add_argument("--srrl", type=str2bool, default='False')
-        parser.add_argument('--lambda_srrl_reg', type=float, default=1.0, help='lambda_srrl') 
-        parser.add_argument('--lambda_srrl_feat', type=float, default=1.0, help='lambda_srrl') 
-        parser.add_argument('--reg_loss', type=str, default='mse', help='srrl regression loss') 
-        parser.add_argument('--srrl_layer', type=str, default='last', help='srrl feature layer') 
+        parser.add_argument('--lambda_srrl_reg', type=float, default=1.0, help='lambda_srrl')
+        parser.add_argument('--lambda_srrl_feat', type=float, default=1.0, help='lambda_srrl')
+        parser.add_argument('--reg_loss', type=str, default='mse', help='srrl regression loss')
+        parser.add_argument('--srrl_layer', type=str, default='last', help='srrl feature layer')
         # MGD
         parser.add_argument("--mgd", type=str2bool, default='True')
-        parser.add_argument('--lambda_mgd', type=float, default=0.001, help='lambda_mgd') 
-        parser.add_argument('--alpha_mgd', type=float, default=0.25, help='alpha_mgd') 
-        parser.add_argument('--mgd_layer', type=str, default='back', help='mgd feature layer') 
-        parser.add_argument('--mgd_mask', type=str, default='channel', help='mgd feature mask') 
+        parser.add_argument('--lambda_mgd', type=float, default=0.001, help='lambda_mgd')
+        parser.add_argument('--alpha_mgd', type=float, default=0.25, help='alpha_mgd')
+        parser.add_argument('--mgd_layer', type=str, default='back', help='mgd feature layer')
+        parser.add_argument('--mgd_mask', type=str, default='channel', help='mgd feature mask')
         # DKD
         parser.add_argument("--dkd", type=str2bool, default='True')
-        parser.add_argument('--lambda_dkd', type=float, default=0.1, help='lambda_dkd') 
-        parser.add_argument('--alpha_dkd', type=float, default=1.0, help='alpha_dkd') 
-        parser.add_argument('--beta_dkd', type=float, default=8.0, help='beta_dkd') 
+        parser.add_argument('--lambda_dkd', type=float, default=0.1, help='lambda_dkd')
+        parser.add_argument('--alpha_dkd', type=float, default=1.0, help='alpha_dkd')
+        parser.add_argument('--beta_dkd', type=float, default=8.0, help='beta_dkd')
         parser.add_argument("--temp_dkd", type=float, default=4.0, help="temp_dkd")
-        parser.add_argument('--norm_dkd', type=str, default='channel', help='dkd feature norm') 
-        parser.add_argument('--warmup_dkd', type=float, default=400, help='dkd warmup') 
+        parser.add_argument('--norm_dkd', type=str, default='channel', help='dkd feature norm')
+        parser.add_argument('--warmup_dkd', type=float, default=400, help='dkd warmup')
 
         # Checkpoint
         parser.add_argument("--save_name", type=str, default='exp')
@@ -148,7 +148,7 @@ class TrainOptions():
         parser.add_argument("--save_ckpt_every", type=int, default=SAVE_CKPT_EVERY)
         parser.add_argument("--log_freq", type=int, default=200, help="Number of training steps")
         parser.add_argument("--save_out", action="store_true", help="Use a fixed seed")
-        
+
         # Reproducibility
         parser.add_argument("--reproduce", action="store_true", help="Use a fixed seed")
         parser.add_argument("--seed", type=int, default=0, help="Random seed")
@@ -159,12 +159,12 @@ class TrainOptions():
         parser.add_argument("--n_trials", type=int, default=N_TRIALS, help="Number of trials")
         parser.add_argument("--hp_search_name", default=HP_SEARCH_NAME, type=str, help="Hyperparameter search name")
         parser.add_argument("--hp_search_path", default=HP_SEARCH_DIR, type=str, help="Hyperparameter search directory")
-        
+
         try:
             args = parser.parse_args()
         except:
             args = parser.parse_args('')
-        
+
         if not os.path.exists(args.save_dir):
             os.makedirs(args.save_dir)
         args.save_path = args.save_dir + '/' + args.save_name
@@ -172,7 +172,7 @@ class TrainOptions():
 
         return args
 
-    
+
 class ValOptions():
     def initialize(self):
         parser = argparse.ArgumentParser(description='Val')
@@ -185,11 +185,11 @@ class ValOptions():
         args = parser.parse_args()
 
         for key, val in args._get_kwargs():
-            print(key+' : '+str(val))
+            print(key + ' : ' + str(val))
 
         return args
 
-    
+
 class TestOptions():
     def initialize(self):
         parser = argparse.ArgumentParser(description='Test')
@@ -202,11 +202,11 @@ class TestOptions():
         args = parser.parse_args()
 
         for key, val in args._get_kwargs():
-            print(key+' : '+str(val))
+            print(key + ' : ' + str(val))
 
         return args
 
-    
+
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
@@ -214,8 +214,8 @@ def str2bool(v):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
-        
-        
+
+
 def log_init(log_dir, name='log'):
     time_cur = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
     if os.path.exists(log_dir) == False:
