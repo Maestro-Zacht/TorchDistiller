@@ -43,7 +43,7 @@ jobs:
             type=semver,pattern=v{{major}},value=${{ github.ref_name }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
