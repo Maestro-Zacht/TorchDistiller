@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: maestro-zacht/pytorch-test
+  IMAGE_NAME: pic4ser-kubernetes/pytorch-test
 
 jobs:
   deploy:
