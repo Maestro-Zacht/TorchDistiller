@@ -16,10 +16,10 @@ spec:
               imagePullPolicy: IfNotPresent
               command:
                 - "bash"
-                - "/mnt/code/train_cwd.sh"
+                - "/code/train_cwd.sh"
               volumeMounts:
                 - name: code-volume
-                  mountPath: /mnt/code
+                  mountPath: /code
                 - name: dataset-volume
                   mountPath: /mnt/dataset
               resources:
