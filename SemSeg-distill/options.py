@@ -2,6 +2,7 @@ import os
 import argparse
 import logging
 import time
+import torch.distributed as dist
 
 
 # Dataset
@@ -52,6 +53,13 @@ HP_SEARCH_DIR = 'trials'
 class TrainOptions():
     def initialize(self):
         parser = argparse.ArgumentParser(description='train')
+
+        # Distributed
+        if dist.is_available():
+            parser.add_argument("--backend", type=str, help="Distributed backend",
+                                choices=[dist.Backend.GLOO,
+                                         dist.Backend.NCCL, dist.Backend.MPI],
+                                default=dist.Backend.NCCL)
 
         # GPU
         parser.add_argument("--gpu", default='0', help="Choose gpu device")
