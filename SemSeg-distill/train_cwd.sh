@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CITYSCAPES=../../CIRKD/data/Cityscapes
-PASCALVOC=../../CIRKD/data/PascalVOC
+CITYSCAPES=/mnt/dataset/CIRKD/data/Cityscapes
+PASCALVOC=/mnt/dataset/CIRKD/data/PascalVOC
 NORM=channel
 DIVERGENCE=kl
 KD_WEIGHT=0
