@@ -6,12 +6,12 @@ ENV IABN_FORCE_CUDA=1
 RUN mkdir /code
 WORKDIR /code
 
-COPY . .
+COPY SemSeg-distill/requirements.txt /tmp/requirements.txt
 
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 
 RUN pip install --upgrade pip --no-cache-dir
 RUN pip install wheel --no-cache-dir
-RUN pip install -r SemSeg-distill/requirements.txt --no-cache-dir
+RUN pip install -r /tmp/requirements.txt --no-cache-dir
 
 CMD [ "echo", "'PyTorch test image'" ]
