@@ -7,16 +7,16 @@ import time
 # Dataset
 DATASET = 'cityscapes'
 NUM_CLASSES = 19 if DATASET == 'cityscapes' else 21
-DATA_DIRECTORY = '/home/simone/kd/CIRKD/data/Cityscapes/'
+DATA_DIRECTORY = '/mnt/dataset/CIRKD/data/Cityscapes/'
 
 if DATASET == 'cityscapes':
     DATA_LIST_TRAIN_PATH = './dataset/list/cityscapes/train.lst'
     DATA_LIST_VAL_PATH = './dataset/list/cityscapes/val.lst'
     DATA_LIST_TEST_PATH = './dataset/list/cityscapes/test.lst'
-    T_CKPT = '/home/simone/kd/CWD/ckpt/teacher_city.pth'  # '../../CWD/ckpt/resnet101.pth' #
+    T_CKPT = '/mnt/dataset/CWD/ckpt/teacher_city.pth'  # '../../CWD/ckpt/resnet101.pth' #
 else:
-    DATA_LIST_TRAIN_PATH = '/home/simone/kd/CIRKD/data/PascalVOC/ImageSets/Segmentation/train.txt'
-    DATA_LIST_VAL_PATH = '/home/simone/kd/CIRKD/data/PascalVOC/ImageSets/Segmentation/val.txt'
+    DATA_LIST_TRAIN_PATH = '/mnt/dataset/CIRKD/data/PascalVOC/ImageSets/Segmentation/train.txt'
+    DATA_LIST_VAL_PATH = '/mnt/dataset/CIRKD/data/PascalVOC/ImageSets/Segmentation/val.txt'
     DATA_LIST_TEST_PATH = None
     T_CKPT = './ckpt/train_epoch_50.pth'
 
@@ -25,7 +25,7 @@ INPUT_SIZE = '512,512'
 
 # Weights
 
-S_CKPT = '/home/simone/kd/CWD/ckpt/resnet18-imagenet.pth'
+S_CKPT = '/mnt/dataset/CWD/ckpt/resnet18-imagenet.pth'
 T_PATH = './ckpt/teachers'
 
 # Training HPs
