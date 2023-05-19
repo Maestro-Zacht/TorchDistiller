@@ -1,0 +1,65 @@
+---
+apiVersion: "kubeflow.org/v1"
+kind: PyTorchJob
+metadata:
+  name: semseg
+spec:
+  pytorchReplicaSpecs:
+    Master:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: ghcr.io/pic4ser-kubernetes/pytorch-test:v0.1.9
+              imagePullPolicy: IfNotPresent
+              command:
+                - "bash"
+                - "/mnt/code/train_cwd.sh"
+              volumeMounts:
+                - name: code-volume
+                  mountPath: /mnt/code
+                - name: dataset-volume
+                  mountPath: /mnt/dataset
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+          volumes:
+            - name: code-volume
+              nfs:
+                server: bonnie.polito.it
+                path: /home/matteoghia/TorchDistiller/SemSeg-distill
+            - name: dataset-volume
+              nfs:
+                server: clyde.polito.it
+                path: /home/simone/kd
+    Worker:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: ghcr.io/pic4ser-kubernetes/pytorch-test:v0.1.9
+              imagePullPolicy: IfNotPresent
+              command:
+                - "bash"
+                - "/mnt/code/train_cwd.sh"
+              volumeMounts:
+                - name: code-volume
+                  mountPath: /mnt/code
+                - name: dataset-volume
+                  mountPath: /mnt/dataset
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+          volumes:
+            - name: code-volume
+              nfs:
+                server: bonnie.polito.it
+                path: /home/matteoghia/TorchDistiller/SemSeg-distill
+            - name: dataset-volume
+              nfs:
+                server: clyde.polito.it
+                path: /home/simone/kd
