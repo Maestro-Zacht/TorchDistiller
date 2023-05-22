@@ -16,8 +16,10 @@ spec:
               tty: true
               imagePullPolicy: IfNotPresent
               command:
-                - "bash"
-                - "/code/train_cwd.sh"
+                # - "bash"
+                # - "/code/train_cwd.sh"
+                - "sleep"
+                - "1000000"
               volumeMounts:
                 - name: code-volume
                   mountPath: /code
