@@ -13,7 +13,6 @@ spec:
           containers:
             - name: pytorch
               image: ghcr.io/pic4ser-kubernetes/pytorch-test:v0.1.12
-              tty: true
               imagePullPolicy: IfNotPresent
               command:
                 # - "bash"
@@ -51,7 +50,6 @@ spec:
           containers:
             - name: pytorch
               image: ghcr.io/pic4ser-kubernetes/pytorch-test:v0.1.12
-              tty: true
               imagePullPolicy: IfNotPresent
               command:
                 - "bash"
