@@ -1,5 +1,6 @@
 from networks.kd_model import load_T_model
 import optuna
+import sys
 import torchvision
 import torch.distributed as dist
 import torch
@@ -17,7 +18,7 @@ import warnings
 import logging
 from alive_progress import alive_it
 from alive_progress import config_handler
-config_handler.set_global(length=15, force_tty=True)
+config_handler.set_global(length=15, force_tty=True, file=sys.stdout)
 
 
 WORLD_SIZE = int(os.environ.get("WORLD_SIZE", 1))
