@@ -36,7 +36,7 @@ spec:
             - name: dataset-volume
               nfs:
                 server: clyde.polito.it
-                path: /home/simone/kd
+                path: /home/simone/KD
             - name: dshm
               emptyDir:
                 medium: Memory
@@ -72,7 +72,7 @@ spec:
             - name: dataset-volume
               nfs:
                 server: clyde.polito.it
-                path: /home/simone/kd
+                path: /home/simone/KD
             - name: dshm
               emptyDir:
                 medium: Memory
