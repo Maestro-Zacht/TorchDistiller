@@ -1,4 +1,4 @@
-alive_progress==2.4.1
+alive_progress==3.1.2
 inplace_abn==1.1.0
 joblib==1.2.0
 lovely_tensors==0.1.10
