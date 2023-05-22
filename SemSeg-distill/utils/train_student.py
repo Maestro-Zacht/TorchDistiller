@@ -18,7 +18,7 @@ import warnings
 import logging
 from alive_progress import alive_it
 from alive_progress import config_handler
-config_handler.set_global(length=15, force_tty=True, file=sys.stdout)
+config_handler.set_global(length=15, force_tty=True, file=sys.stderr)
 
 
 WORLD_SIZE = int(os.environ.get("WORLD_SIZE", 1))

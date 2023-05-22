@@ -154,7 +154,7 @@ class TrainOptions():
         parser.add_argument("--save_dir", type=str, default='ckpt', help="Where to save models")
         parser.add_argument("--save_ckpt_start", type=int, default=SAVE_CKPT_START)
         parser.add_argument("--save_ckpt_every", type=int, default=SAVE_CKPT_EVERY)
-        parser.add_argument("--log_freq", type=int, default=200, help="Number of training steps")
+        parser.add_argument("--log_freq", type=int, default=50, help="Number of training steps")
         parser.add_argument("--save_out", action="store_true", help="Use a fixed seed")
 
         # Reproducibility
